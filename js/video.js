@@ -23,17 +23,9 @@ document.querySelector("#pause").addEventListener("click", function() {
 })
 
 // Utility function to update video playbackRate
-function updateSpeed(video, percentage, slower) {
-	let scaler = (100 - percentage) / 100;
-	// Slow down by percentage
-	if (slower) {
-		video.playbackRate *= scaler;
-	}
-	// Speed up by percentage
-	else {
-		video.playbackRate /= scaler;
-	}
-	// Reset playback rate to 100% when within margin of error
+function updateSpeed(video, scaler) {
+	video.playbackRate *= scaler;
+	// Set speed to exactly 100% when close to mitigate accumulating error
 	if (video.playbackRate > 0.99 && video.playbackRate < 1.01) {
 		video.playbackRate = 1.0;
 	}
@@ -42,10 +34,11 @@ function updateSpeed(video, percentage, slower) {
 
 // Slow video down by 10%
 document.querySelector("#slower").addEventListener("click", function() {
-	updateSpeed(video, 10, true)
+	updateSpeed(video, 90 / 100);
 })
 
 // Speed video up by 10%
 document.querySelector("#faster").addEventListener("click", function() {
-	updateSpeed(video, 10, false)
+	updateSpeed(video, 100 / 90);
 })
+
