@@ -47,3 +47,16 @@ document.querySelector("#faster").addEventListener("click", function() {
 	updateSpeed(video, 100 / 90);
 })
 
+// Skip ahead ten seconds
+document.querySelector("#skip").addEventListener("click", function() {
+	let currentTime = video.currentTime;
+	let newTime = 10 + currentTime;
+	// If end of video is exceded, go back to 0:00 exactly
+	if (newTime > video.duration) {
+		video.currentTime = 0;
+	}
+	else {
+		video.currentTime = newTime;
+	}
+	console.log(`Current location in video is ${video.currentTime} seconds`);
+})
