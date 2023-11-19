@@ -13,8 +13,13 @@ window.addEventListener("load", function() {
 // 	console.log("Play Video");
 // });
 
+// Converts slider into range [0, 1] volume needs
+function getVolume(slider) {
+	return slider.value * 0.01;
+}
+
 document.querySelector("#play").addEventListener("click", function() {
-	video.volume = volumeSlider.value * 0.01;
+	video.volume = getVolume(volumeSlider);
 	video.play();
 })
 
