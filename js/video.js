@@ -58,8 +58,8 @@ document.querySelector("#faster").addEventListener("click", function() {
 document.querySelector("#skip").addEventListener("click", function() {
 	let currentTime = video.currentTime;
 	let newTime = 10 + currentTime;
-	// If end of video is exceded, go back to 0:00 exactly
-	if (newTime > video.duration) {
+	// If end of video is reached or exceded, go back to 0:00 exactly
+	if (newTime >= video.duration) {
 		video.currentTime = 0;
 	}
 	else {
