@@ -18,8 +18,15 @@ function getVolume(slider) {
 	return slider.value * 0.01;
 }
 
+// Sets video to volume denoted by slider
+function updateVolume(video, slider) {
+	video.volume = getVolume(slider);
+	// Render volume percentage as text to the page
+	document.querySelector("#volume").textContent = `${video.volume * 100}%`;
+}
+
 document.querySelector("#play").addEventListener("click", function() {
-	video.volume = getVolume(volumeSlider);
+	updateVolume(video, volumeSlider);
 	video.play();
 })
 
@@ -42,7 +49,7 @@ document.querySelector("#slower").addEventListener("click", function() {
 	updateSpeed(video, 90 / 100);
 })
 
-// Speed video up by 10%
+// Speed video up to reverse 10% slowdown
 document.querySelector("#faster").addEventListener("click", function() {
 	updateSpeed(video, 100 / 90);
 })
@@ -77,3 +84,8 @@ document.querySelector("#mute").addEventListener("click", function() {
 	this.textContent = newText;
 })
 
+// Adjust volume when range input slider is changed
+document.querySelector("#slider").addEventListener("input", function() {
+	updateVolume(video, volumeSlider);
+	console.log(`Volume is now ${video.volume * 100}%`);
+})
