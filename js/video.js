@@ -60,3 +60,20 @@ document.querySelector("#skip").addEventListener("click", function() {
 	}
 	console.log(`Current location in video is ${video.currentTime} seconds`);
 })
+
+// Mute/unmute
+document.querySelector("#mute").addEventListener("click", function() {
+	// Invert truth value of muted state
+	video.muted = !video.muted;
+	let muted = video.muted;
+	let newText;
+	// Set button text to read opposite of current state
+	if (muted) {
+		newText = "Unmute";
+	}
+	else {
+		newText = "Mute";
+	}
+	this.textContent = newText;
+})
+
