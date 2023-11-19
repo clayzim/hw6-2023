@@ -89,3 +89,13 @@ document.querySelector("#slider").addEventListener("input", function() {
 	updateVolume(video, volumeSlider);
 	console.log(`Volume is now ${video.volume * 100}%`);
 })
+
+// Style with oldSchool class when "Old School" button is activated
+document.querySelector("#vintage").addEventListener("click", function() {
+	video.classList.add("oldSchool");
+})
+
+// Remove oldSchool class styling when "Original" button is activated
+document.querySelector("#orig").addEventListener("click", function() {
+	video.classList.remove("oldSchool");
+})
