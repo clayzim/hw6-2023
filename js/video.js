@@ -6,12 +6,10 @@ window.addEventListener("load", function() {
 	video = document.querySelector("#player1");
 	volumeSlider = document.querySelector("#slider");
 	video.autoplay = false;
+	console.log(`Auto play is set to ${video.autoplay}`);
 	video.loop = false;
+	console.log(`Loop is set to ${video.loop}`);
 });
-
-// document.querySelector("#play").addEventListener("click", function() {
-// 	console.log("Play Video");
-// });
 
 // Converts slider into range [0, 1] volume needs
 function getVolume(slider) {
@@ -28,10 +26,12 @@ function updateVolume(video, slider) {
 document.querySelector("#play").addEventListener("click", function() {
 	updateVolume(video, volumeSlider);
 	video.play();
+	console.log("Play Video");
 })
 
 document.querySelector("#pause").addEventListener("click", function() {
 	video.pause();
+	console.log("Pause Video");
 })
 
 // Utility function to update video playbackRate
@@ -41,21 +41,24 @@ function updateSpeed(video, scaler) {
 	if (video.playbackRate > 0.99 && video.playbackRate < 1.01) {
 		video.playbackRate = 1.0;
 	}
-	console.log(`Speed is now ${video.playbackRate * 100}%`);
+	console.log(`Speed is ${video.playbackRate}`);
 }
 
 // Slow video down by 10%
 document.querySelector("#slower").addEventListener("click", function() {
+	console.log("Slow down video");
 	updateSpeed(video, 90 / 100);
 })
 
 // Speed video up to reverse 10% slowdown
 document.querySelector("#faster").addEventListener("click", function() {
+	console.log("Speed up Video");
 	updateSpeed(video, 100 / 90);
 })
 
 // Skip ahead ten seconds
 document.querySelector("#skip").addEventListener("click", function() {
+	console.log("Skip ahead");
 	let currentTime = video.currentTime;
 	let newTime = 10 + currentTime;
 	// If end of video is reached or exceded, go back to 0:00 exactly
@@ -65,11 +68,12 @@ document.querySelector("#skip").addEventListener("click", function() {
 	else {
 		video.currentTime = newTime;
 	}
-	console.log(`Current location in video is ${video.currentTime} seconds`);
+	console.log(`Video current time is ${video.currentTime}`);
 })
 
 // Mute/unmute
 document.querySelector("#mute").addEventListener("click", function() {
+	console.log(this.textContent);
 	// Invert truth value of muted state
 	video.muted = !video.muted;
 	let muted = video.muted;
@@ -86,8 +90,9 @@ document.querySelector("#mute").addEventListener("click", function() {
 
 // Adjust volume when range input slider is changed
 document.querySelector("#slider").addEventListener("input", function() {
+	console.log(`The current value is ${this.value / 100}`);
 	updateVolume(video, volumeSlider);
-	console.log(`Volume is now ${video.volume * 100}%`);
+	console.log(document.querySelector("#volume"));
 })
 
 // Style with oldSchool class when "Old School" button is activated
